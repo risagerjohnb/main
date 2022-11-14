@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import './App.css'
+import TodoForm from "./components/TodoForm"
+import Todolist from "./components/Todolist"
+import Testing from "./Test"
 
-function App() {
+const LOCAL_STORAGE_KEY = "react-what-todo-todos";
+
+export default function App() {
+  const [todos, setTodos] = useState([]);
+    
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos))
+  }, [todos]);
+
+  useEffect(() => {
+    const storageTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (storageTodos) {
+      setTodos(storageTodos); //calls setTodos but only if its null
+    }
+  }, [])
+
+  function addTodo(todo) { //addTodo function is a prop
+    setTodos([todo, ...todos]) //todo=new, todos=old
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Testing />
+    <TodoForm addTodo={addTodo} />
+    <Todolist todos={todos} />
+    </>
   );
 }
-
-export default App;
