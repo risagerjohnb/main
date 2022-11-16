@@ -4,7 +4,7 @@ import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid' //creates an unique id everytime a todo is added
 
 export default function TodoForm( {addTodo} ) { 
-    const [todo, setTodo] = useState({
+    const [todo, setTodo] = useState({ //todo:old input, setTodo:new input
         id: "",
         task: "",
     });
