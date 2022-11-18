@@ -5,7 +5,7 @@ import App from './App';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+root.render( //render læser props, state og print JSX 
   <React.StrictMode>
     <App />
   </React.StrictMode>
